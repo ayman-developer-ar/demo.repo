@@ -1,6 +1,6 @@
 @if (strlen(string: $myname) > 5)
 
-    <p>Hello</p>
+    <p>Hello Ayman</p>
 
     @else
 
@@ -8,7 +8,7 @@
 
 @endif
 
-@unless(strlen(string: $myname) < 5)  
+@unless(strlen(string: $myname) == 5)  
 
     <h1>your name is long</h1>
 

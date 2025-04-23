@@ -1,5 +1,3 @@
-<h1>Car types List</h1>
-
 @foreach ($car_Types as $car_Type)
 
     <p>{{ $car_Type }}</p>
@@ -11,13 +9,13 @@
     <p>{{ $number }}</p>
 
     @empty
-        <p>No numbers</p>
+        <p>No numbers found</p>
 @endforelse
 
 @while ($x < 10)
     <p>{{ $x }}</p>
     @php
-        $x++;
+        $x+=2;
     @endphp
 @endwhile
 
