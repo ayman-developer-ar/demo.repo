@@ -9,7 +9,7 @@
     <br>
     <div>
         <label>
-            Product Price: <input type="text" name="price" required>
+            Product Price: <input type="number" name="price" required>
         </label>
     </div>
     <br>

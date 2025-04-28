@@ -1,39 +1,9 @@
-{{-- 
-
-@extends('layout.app')
-
-@section('title', 'Products')
-
-@section('content')
-
-    <h2>Products List</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Product name</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($products as $p)
-                <tr>
-                    <th>{{ $p['name'] }}</th>
-                    <th>{{ $p['price'] }}</th>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-@endsection
-
---}}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products List</title>
+    <title>Categories List</title>
     <style>
 
         body {
@@ -85,19 +55,21 @@
     </header>
     
     <center>
-        <h2>Products List</h2>
+        <h2>Categories List</h2>
         <table>
             <thead>
                 <tr>
-                    <th>Product name</th>
-                    <th>Price</th>
+                    <th>Category name</th>
+                    <th>Category type</th>
+                    <th>Category Price</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $p)
+                @foreach ($categories as $c)
                     <tr>
-                        <th>{{ $p['name'] }}</th>
-                        <th>{{ $p['price'] }}</th>
+                        <th>{{ $c['name'] }}</th>
+                        <th>{{ $c['type'] }}</th>
+                        <th>{{ $c['price'] }}</th>
                     </tr>
                 @endforeach
             </tbody>
