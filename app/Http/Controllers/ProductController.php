@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -14,6 +15,9 @@ class ProductController extends Controller
             ['name' => 'Headphone', 'price' => 300]
         ];
         //return $products;
+        //return view('products.index', compact('products'));
+
+        $products = Product::all();
         return view('products.index', compact('products'));
     } 
 
@@ -31,7 +35,7 @@ class ProductController extends Controller
         //return view('products.show', compact('products'));
     }
 
-    public function show($id) 
+    /*public function show($id) 
     {
         $products = [
             1 => ['name' => 'laptop', 'price' => 1500],
@@ -41,7 +45,14 @@ class ProductController extends Controller
 
         $product = $products[$id] ?? ['name' => 'unknown product', 'price' => 0];
 
-        return $product;
+        //return $product;
         //return view('products.show', compact('product'));
+    }*/
+
+    public function show($id) {
+        $product = Product::find($id);
+        return view('products.show', compact('product'));
     }
+        
+    
 }
