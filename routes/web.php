@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+//use App\Http\Controllers\CategoryController;
 
 /*
 Route::get('/products', function () {
@@ -40,20 +40,20 @@ Route::get('/products/{id?}', function ($id = 4) {
 */
 
 //Routes for products folder
-/*Route::get('/products/index', [ProductController::class, 'index'])->name('products');
+//Route::get('/products/index', [ProductController::class, 'index'])->name('products');
 
 Route::get('/products/create_product', [ProductController::class, 'create'])->name('products.create');
 
-Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
+/*Route::post('/products/store', [ProductController::class, 'store'])->name('products.store');
 
 Route::get('/products/show/{id}', [ProductController::class, 'show'])->name('products.show');*/
 
 
 //Routes for categories folder
-Route::get('/categories/index', [CategoryController::class, 'index'])->name('categories');
+/*Route::get('/categories/index', [CategoryController::class, 'index'])->name('categories');
 
 Route::get('/categories/create_category', [CategoryController::class, 'create'])->name('categories.create');
 
 Route::post('/categories/store', [CategoryController::class, 'store'])->name('categories.store');
 
-Route::get('/categories/show/{id}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/show/{id}', [CategoryController::class, 'show'])->name('categories.show');*/
