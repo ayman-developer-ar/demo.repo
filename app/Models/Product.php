@@ -13,7 +13,17 @@ class Product extends Model
         'name',
         'price',
         'description',
-        'category'
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function variant()
+    {
+        return $this->belongsTo(ProductVariant::class);
+    }
     //
 }
