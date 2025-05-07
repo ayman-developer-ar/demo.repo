@@ -3,6 +3,7 @@
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\AuthController;
+use \App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,14 +15,18 @@ Route::get('/user', function (Request $request) {
 
 
 //////////// Authentication lesson //////////////////////////////////
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
-
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::post('/profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
-
+Route::post('user/register', [AuthController::class, 'register']);
+Route::post('user/login', [AuthController::class, 'login']);
+Route::post('user/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('user/profile', [AuthController::class, 'profile'])->middleware('auth:sanctum');
 
 
+Route::post('/admin/register', [AdminAuthController::class, 'register']);
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
+Route::middleware(['auth:sanctum', 'admin'])->group(function () 
+{
+    Route::post('/admin/logout', [AdminAuthController::class, 'logout']);
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
