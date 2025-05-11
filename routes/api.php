@@ -3,6 +3,8 @@
 use App\Models\Product;
 use App\Models\Category;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use \App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Http\Request;
@@ -74,6 +76,10 @@ Route::get('/products_of_category/{id}', function(Request $request, $id)
     $products = Category::findOrFail($id)->product;
     return $products;
 })->name('products_of_category');
+
+
+Route::get('/products', [ProductController::class, 'index']);
+Route::get('/categories', [CategoryController::class, 'index']);
 
 
 
