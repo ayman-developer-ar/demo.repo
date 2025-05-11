@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
-    public function index()
+    /*public function index()
     {
         $products = [
             ['name' => 'Laptop', 'price' => 1500],
@@ -19,7 +20,24 @@ class ProductController extends Controller
 
         $products = Product::all();
         return view('products.index', compact('products'));
-    } 
+    } */
+
+    public function index()
+    {
+        /////////////// Eager Loading ///////////////////////////
+        //$products = Product::with(['category'])->get();
+        //$products = Product::with(['category'])->paginate(2);
+        //return ProductResource::collection($products);
+
+
+        /////////////// Lazy Loading ///////////////////////////
+        $products = Product::all(); 
+        foreach ($products as $product) {
+            $product->load('category');
+        }
+        return $products;
+
+    }
 
     public function create()
     {
