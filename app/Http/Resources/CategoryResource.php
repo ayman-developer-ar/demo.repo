@@ -20,10 +20,15 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'type' => $this->type,
 
-            'products' => $this->products,
+            'products' => $this->whenloaded('products', fn() => $this->products->map(
+                fn($p) => [
+                    'id' => $p->id,
+                    'name' => $p->name,
+                    'price' => $p->price,
+                ]
+                )),
 
-
-
+            //'products' => $this->products,
         ];
     }
 }

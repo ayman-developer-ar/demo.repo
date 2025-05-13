@@ -21,25 +21,18 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'price' => $this->price,
-            'description' => $this->description,
+            //'description' => $this->description,
             //'category' => $this->category,
+
+            'category' => CategoryResource::collection(
+                $this->whenloaded('category')
+            )
 
             /*'category' => $this->whenLoaded('category', function () {
                 return $this->category->type;
             }),*/
 
-            /*'category' => $this->whenLoaded('category', function () {
-                return [
-                    'id' => $this->category->id,
-                    'type' => $this->category->type,
-                ];
-            }),*/
-
             //'category' => new CategoryResource($this->whenLoaded('category')),
-
-
-            
-
 
 
 
@@ -52,10 +45,7 @@ class ProductResource extends JsonResource
             'category' => $this->when(
                 $request->user()->tokenCan('role:admin'),
                 $this->category->name
-            )*/
-
-
-            
+            )*/  
         ];
     }
 }

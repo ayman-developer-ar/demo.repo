@@ -26,16 +26,16 @@ class ProductController extends Controller
     {
         /////////////// Eager Loading ///////////////////////////
         //$products = Product::with(['category'])->get();
-        //$products = Product::with(['category'])->paginate(2);
-        //return ProductResource::collection($products);
+        $products = Product::with(['category'])->paginate(2);
+        return ProductResource::collection($products);
 
 
         /////////////// Lazy Loading ///////////////////////////
-        $products = Product::all(); 
+        /*$products = Product::all(); 
         foreach ($products as $product) {
             $product->load('category');
         }
-        return $products;
+        return $products;*/
 
     }
 
@@ -44,13 +44,21 @@ class ProductController extends Controller
         return view('products.create_product');
     }
 
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         $name = $request->input('name');
         $price = $request->input('price');
         $products = ['name' => $name, 'price' => $price];
         return $products;
-        //return view('products.show', compact('products'));
+    }*/
+    public function store(Request $r)
+    {
+        $p = Product::create($r->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'category_id' => 'required'
+        ]));
+        return new ProductResource($p);
     }
 
     /*public function show($id) 

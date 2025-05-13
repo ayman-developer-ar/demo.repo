@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\UserResource;
 
 
 class AuthController extends Controller
@@ -29,7 +29,7 @@ class AuthController extends Controller
             'password' => bcrypt($request->password),
         ]);
 
-        $token = $user->createToken('auth_token', abilities: ['role:user'])->plainTextToken;
+        $token = $user->createToken('auth_token', ['role:user'])->plainTextToken;
 
         return response()->json([
             'user' => new UserResource($user),
@@ -57,6 +57,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token', ['role:user'])->plainTextToken;
 
         return response()->json([
+            'user' => new UserResource($user),
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
