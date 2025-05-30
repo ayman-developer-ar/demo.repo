@@ -23,16 +23,44 @@ class ProductResource extends Resource
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'المنتجات';
+    protected static ?string $pluralModelLabel = 'المنتجات';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('name'),
-                TextInput::make('price'),
-                TextInput::make('description'),
+                TextInput::make('name')
+                    ->required()
+                    ->label('اسم المنتج'),
+
+                TextInput::make('price')
+                    ->required()
+                    ->label('السعر'),
+
+                TextInput::make('description')
+                    ->required()
+                    ->label('الوصف'),
+
                 Select::make('category_id')
-                    ->relationship('category', 'type'),
+                    ->label('الصنف')
+                    ->relationship('category', 'type')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('type')->required()->label('اسم الصنف'),
+                    ])
+                    ->required(),
+
+                Select::make('product_variant_id')
+                    ->label('حجم الصنف')
+                    ->relationship('variant', 'measure')
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('measure')->required()->label('حجم الصنف'),
+                    ])
+                    ->required(),
                 //
             ]);
     }
@@ -41,11 +69,25 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('price'),
-                TextColumn::make('description'),
-                TextColumn::make('category.type'),
+                TextColumn::make('name')
+                    ->label('اسم المنتج')
+                    ->searchable(),
 
+                TextColumn::make('price')
+                    ->label('السعر')
+                    ->searchable(),
+
+                TextColumn::make('description')
+                    ->label('الوصف')
+                    ->searchable(),
+
+                TextColumn::make('category.type')
+                    ->label('الصنف')
+                    ->searchable(),
+
+                TextColumn::make('variant.measure')
+                    ->label('حجم الصنف')
+                    ->searchable(),
                 //
             ])
             ->filters([
@@ -65,6 +107,8 @@ class ProductResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\CategoryRelationManager::class,
+            RelationManagers\VariantRelationManager::class
             //
         ];
     }
